@@ -24,13 +24,15 @@ module.exports = {
             }, {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
+                    // 在开发环境使用 style-loader
+                    fallback: "style-loader",
                     use: [{
-                        loader: "css-loader"
+                        loader: "css-loader", options: { importLoaders: 1 }
+                    }, {
+                        loader: "postcss-loader"
                     }, {
                         loader: "sass-loader"
-                    }],
-                    // 在开发环境使用 style-loader
-                    fallback: "style-loader"
+                    }]
                 })
             }
         ]
